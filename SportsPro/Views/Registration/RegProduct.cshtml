@@ -1,10 +1,13 @@
-﻿@model MgrRegistrationModel
+﻿@*Coded by Matt Biesbroek*@
+
+@model MgrRegistrationModel
 @{
     ViewData["Title"] = "Registrations";
 }
 <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
+@*If a customer does not have any products registered, the page renders a statement informing the user as such.  There is a dropdown that will still allow for products to be registered*@
 @if (Model.CustomerProducts.Count() == 0)
 {
     <p class="subtitle">There currently aren't any products registered to this customer.</p>
@@ -26,6 +29,7 @@
         </div>
     </form>
 }
+@*The page renders a list of products registered to the customer.  There is a dropdown that allows for the user to register more products*@
 else
 {
     <p class="subtitle">Customer: @ViewBag.CustomerName</p>
@@ -57,7 +61,7 @@ else
     <form asp-action="RegProduct" method="post">
         <input type="hidden" asp-for="CustomerID" />
         <div class="form-group">
-            <div asp-validation-summary="All" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <label name="Product" class="control-label"></label>
             <select name="ProductID" type="number" class="form-control"
                     asp-items="@(new SelectList(ViewBag.Products, "ProductID", "Name"))">

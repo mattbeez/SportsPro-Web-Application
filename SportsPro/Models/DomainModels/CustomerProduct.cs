@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Coded by Matt Biesbroek
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace SportsPro.Models
 {
     public class CustomerProduct
     {
-        [Required]
+        [Required(ErrorMessage = "Please select a product.")]
         public int ProductID { get; set; }
         [Required]
         public int CustomerID { get; set; }
